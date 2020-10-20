@@ -37,22 +37,26 @@
 		}
 	};
 
-	
-	// A kapcsolat oldalon ne jelenjen meg
-  if($("body").hasClass("kapcsolat") || $("body").hasClass("contact")) {
-		$(window).scroll(function() {
-
-      // A lap alján eltűnik, hogy ne takarja ki a láblécet kissebb felbontású monitorokon.
-			if($(window).scrollTop() + $(window).height() > $(document).height() - $('footer').height()) {
-				zE('webWidget', 'hide');
-			}
+ 	window.addEventListener('DOMContentLoaded', function() {
+                (function (window, document, $, zE) {
+			// Change locale
+			// Locale code need custom logic
+			zE('webWidget', 'setLocale', 'hu');
 			
-      if($(window).scrollTop() + $(window).height() < $(document).height() - $('footer').height()) {
-        zE('webWidget', 'show');
-      }
+			// A kapcsolat oldalon ne jelenjen meg
+			if($("body").hasClass("kapcsolat") || $("body").hasClass("contact")) {
+				$(window).scroll(function() {
 
-		});
-	}
+					// A lap alján eltűnik, hogy ne takarja ki a láblécet kissebb felbontású monitorokon.
+					if($(window).scrollTop() + $(window).height() > $(document).height() - $('footer').height()) {
+						zE('webWidget', 'hide');
+					} else {
+						zE('webWidget', 'show');
+					}
 
+				});
+			}
+		})(window, document, jQuery, zE);
+	});
 </script>
 <!-- End of fotoplus Zendesk Widget script -->
